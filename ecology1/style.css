@@ -1,0 +1,146 @@
+
+body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: url('your-image-url.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #333;
+}
+.background {
+ background-image: url('bgp.jpg');
+ background-size: cover;
+ background-position: center;
+filter: blur(8px); /* 设置背景模糊效果 */
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: -1; /* 确保背景在内容后面 */
+}
+.quiz-container {
+    text-align: center;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+.question {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    transition: opacity 0.5s;
+}
+.options button {
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+    padding: 10px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background: linear-gradient(45deg, #4CAF50, #2E7D32);
+    color: white;
+    transition: background 0.3s, transform 0.2s;
+}
+.options button:hover {
+    background: #2E7D32;
+    transform: scale(1.05);
+}
+.feedback {
+    font-size: 1.5em;
+    margin-top: 20px;
+    display: none;
+}
+.feedback.correct { color: green; }
+.feedback.wrong { color: red; }
+.score {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #4CAF50;
+    margin-top: 20px;
+}
+.emoji {
+    font-size: 3em;
+}
+
+@keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+.fade {
+    animation: fade 0.5s;
+}
+.share-buttons {
+    margin-top: 20px;
+}
+
+/* 飘落枫叶的样式 */
+.leaf {
+    position: absolute;
+    top: -10%;
+    opacity: 0.8;
+    pointer-events: none; /* 使叶子不影响其他元素的点击 */
+    animation: fall ease-in-out infinite; /* 使用fall动画 */
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0);
+        transform: translateX(0);
+        transform: scale(1);
+    }
+    100% {
+        transform: translateY(100vh);
+        transform: scale(0.5); /* 从顶部到达底部 */
+    }
+}
+
+/* 小屏幕样式（最大宽度 600px） */
+@media screen and (max-width: 600px) {
+.quiz-container {
+max-width: 90%; /* 增加容器宽度 */
+padding: 15px; /* 调整内边距 */
+}
+.question {
+font-size: 1.2em; /* 调整问题字体大小 */
+}
+.options button {
+padding: 8px; /* 调整按钮内边距 */
+font-size: 0.9em; /* 调整按钮字体大小 */
+}
+}
+
+/* 中等屏幕样式（601px 到 900px） */
+@media screen and (min-width: 601px) and (max-width: 900px) {
+.quiz-container {
+max-width: 80%; /* 减小容器宽度 */
+}
+.question {
+font-size: 1.4em; /* 调整问题字体大小 */
+}
+.options button {
+padding: 10px; /* 调整按钮内边距 */
+font-size: 1em; /* 调整按钮字体大小 */
+}
+}
+
+/* 大屏幕样式（901px 及以上） */
+@media screen and (min-width: 901px) {
+.quiz-container {
+max-width: 600px; /* 设定最大容器宽度 */
+}
+.question {
+font-size: 1.5em; /* 保持问题字体大小 */
+}
+.options button {
+padding: 12px; /* 调整按钮内边距 */
+font-size: 1.1em; /* 调整按钮字体大小 */
+}
+}
+

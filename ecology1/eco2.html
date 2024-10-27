@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生态保护知识问答</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" >
+    <link rel="stylesheet" href="style.css">
+  
+
+
+   
+      
+</head>
+<body>
+    <div class="background"></div>
+    <div class="quiz-container">
+        <div class="question fade"></div>
+        <div class="options"></div>
+        <div class="feedback">
+            <span class="emoji"></span> <span class="message"></span>
+        </div>
+        <div class="score"></div>
+    </div>
+
+    <script>
+        // 题目数组
+        const questions = [
+            { question: "什么是温室效应的主要原因？", options: ["二氧化碳排放", "核能利用", "水蒸气增加", "海洋污染"], answer: 0 },
+            { question: "下列哪种行为有助于减少塑料污染？", options: ["使用一次性塑料袋", "购买塑料瓶装水", "使用布袋购物", "丢弃垃圾在海滩上"], answer: 2 },
+            { question: "下列哪一种是可再生能源？", options: ["煤炭", "石油", "风能", "天然气"], answer: 2 },
+            { question: "全球变暖对以下哪个方面的影响最大？", options: ["科技发展", "海平面上升", "经济增长", "通讯速度"], answer: 1 },
+            { question: "臭氧层的主要功能是什么？", options: ["吸收太阳热量", "保护地球免受紫外线伤害", "提供氧气", "增加大气密度"], answer: 1 },
+            { question: "生态文明建设的根本目标是（ ）。", options: ["经济快速发展", "提高生活水平", "实现人与自然和谐共生", "增加财政收入"], answer: 2 },
+            { question: "以下行为不符合生态文明要求的是（ ）。", options: ["垃圾分类投放", "使用一次性塑料袋", "乘坐公共交通工具出行", "爱护花草树木"], answer: 1 },
+            { question: "生态文明建设应遵循的原则是（ ）。", options: ["先开发后保护", "以经济利益为唯一导向", "尊重自然、顺应自然、保护自然", "随意改变生态环境"], answer: 2 },
+            { question: "在生态文明建设中起关键作用的是（ ）。", options: ["企业", "政府", "公众", "社会组织"], answer: 1 },
+            { question: "生态文明建设的重要标志是（ ）。", options: ["生态环境优美", "经济高度发达", "科技水平先进", "文化繁荣昌盛"], answer: 0 }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        const questionElement = document.querySelector('.question');
+        const optionsContainer = document.querySelector('.options');
+        const feedbackElement = document.querySelector('.feedback');
+        const messageElement = document.querySelector('.message');
+        const emojiElement = document.querySelector('.emoji');
+        const scoreElement = document.querySelector('.score');
+
+        function showQuestion() {
+            const currentQuestion = questions[currentQuestionIndex];
+            questionElement.textContent = currentQuestion.question;
+            optionsContainer.innerHTML = '';
+            feedbackElement.style.display = 'none';
+            questionElement.classList.add('fade');
+
+            currentQuestion.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.onclick = () => checkAnswer(index);
+                optionsContainer.appendChild(button);
+            });
+
+            // Fade in effect
+            setTimeout(() => {
+                questionElement.classList.remove('fade');
+            }, 100);
+        }
+
+        function checkAnswer(selectedIndex) {
+            const currentQuestion = questions[currentQuestionIndex];
+            feedbackElement.style.display = 'block';
+
+            if (selectedIndex === currentQuestion.answer) {
+                score++;
+                emojiElement.textContent = '😊';
+                messageElement.textContent = '答对了！';
+                feedbackElement.classList.add('correct');
+                feedbackElement.classList.remove('wrong');
+            } else {
+                emojiElement.textContent = '😢';
+                messageElement.textContent = '答错了！';
+                feedbackElement.classList.add('wrong');
+                feedbackElement.classList.remove('correct');
+            }
+
+            currentQuestionIndex++;
+
+            setTimeout(() => {
+                if (currentQuestionIndex < questions.length) {
+                    showQuestion();
+                } else {
+                    showScore();
+                }
+            }, 1500);
+        }
+
+        function showScore() {
+            questionElement.textContent = '答题结束！';
+            optionsContainer.innerHTML = '';
+            feedbackElement.style.display = 'none';
+            scoreElement.textContent = `您的总分：${score} / ${questions.length}`;
+            
+            const shareButtons = document.createElement('div');
+            shareButtons.className = 'share-buttons';
+            shareButtons.innerHTML = `
+                <button onclick="shareScore()">分享您的成绩</button>
+            `;
+            optionsContainer.appendChild(shareButtons);
+        }
+
+        function shareScore() {
+            alert(`我在生态保护知识问答中得了 ${score} / ${questions.length}！你能做到吗？`);
+        }
+
+        showQuestion();
+        function createLeaf() {
+    const leaf = document.createElement('img');
+    leaf.src = 'mapleLeaf.png'; // 替换为枫叶图片的路径
+    leaf.classList.add('leaf');
+    leaf.style.left = Math.random() * 100 + 'vw'; // 随机水平位置
+    leaf.style.animationDuration = (Math.random() * 4 + 4) + 's'; // 随机动画时间
+    leaf.style.transform = 'rotate(' + Math.random() * 360 + 'deg)'; // 随机旋转角度
+    document.body.appendChild(leaf);
+
+    // 删除叶子元素
+    setTimeout(() => {
+        leaf.remove();
+    }, 6000);
+}
+
+// 定时生成飘落的枫叶，间隔时间可以适当增加
+setInterval(createLeaf, 1500); // 增加时间间隔
+
+    </script>
+</body>
+</html>
+        
